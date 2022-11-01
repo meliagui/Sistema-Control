@@ -33,7 +33,15 @@
                         <span class="lbl">ACERCA DE</span>
                     </a>
                 </li>
+                 
 
+                <li class="red">
+                    <a href="reportes.php" class="activo">
+                        <img src="../public/img-inicio/reportes.png" class="img-inicio" alt="">
+                        <!-- <i class="fas fa-exclamation"></i> -->
+                        <span class="lbl">REPORTES</span>
+                    </a>
+                </li>
 
 
 

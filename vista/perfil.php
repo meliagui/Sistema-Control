@@ -3,13 +3,8 @@
  if (empty($_SESSION['nombre']) and empty($_SESSION['apellido'])) {
      header('location:login/login.php');
  }
-
+$id=$_SESSION["id"];
 ?>
-<style> 
-  ul li:nth-child(4) .activo{
-    background: rgb(11, 150, 214) !important;
-  }
-  </style>
 
 <!-- primero se carga el topbar -->
 <?php require('./layout/topbar.php'); ?>
@@ -19,32 +14,29 @@
 <!-- inicio del contenido principal -->
 <div class="page-content">
 
-   <h4 class="text-center text-secondary">INFORMACIÓN DE LA EMPRESA</h4>
+   <h4 class="text-center text-secondary">PERFIL</h4>
 
    <?php
    include '../modelo/conexion.php';
-   include "../controlador/controlador_modificar_institucion.php";
+   include "../controlador/controlador_modificar_perfil.php";
 
-   $sql=$conexion->query("select * from institucion");
+   $sql=$conexion->query("select * from usuario where id_usuario=$id");
    ?>
 <div class="row">
   <form action="" method="POST">
     <?php
      while ($datos=$sql->fetch_object()) { ?>
      <div hidden class="fl-flex-label mb-4 px-2 col-12 col-md-6">
-    <input type="text" placeholder="ID" class="input input__text" name="txtid" value="<?= $datos->id_institucion?> ">
+    <input type="text" placeholder="ID" class="input input__text" name="txtid" value="<?= $datos->id_usuario?> ">
     </div>
     <div class="fl-flex-label mb-4 px-2 col-12 col-md-6">
     <input type="text" placeholder="Nombre" class="input input__text" name="txtnombre" value="<?= $datos->nombre?> ">
     </div>
     <div class="fl-flex-label mb-4 px-2 col-12 col-md-6">
-      <input type="text" placeholder="Direccion" class="input input__text" name="txtdireccion" value="<?= $datos->direccion?> ">
+      <input type="text" placeholder="Apellido" class="input input__text" name="txtapellido" value="<?= $datos->apellido?> ">
     </div>
     <div class="fl-flex-label mb-4 px-2 col-12 col-md-6">
-      <input type="text" placeholder="Telefono" class="input input__text" name="txttelefono" value="<?= $datos->telefono?> ">
-    </div>
-    <div class="fl-flex-label mb-4 px-2 col-12 col-md-6">
-      <input type="text" placeholder="RUC" class="input input__text" name="txtruc" value="<?= $datos->RUC?> ">
+      <input type="text" placeholder="Usuario" class="input input__text" name="txtusuario" value="<?= $datos->usuario?> ">
     </div>
     <div class="text-right p-2">
       <button type="submit" value="ok" name="btnmodificar" class="btn btn-primary btn-rounded">Modificar</button>

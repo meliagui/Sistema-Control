@@ -1,69 +1,84 @@
-*{
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-}
-body{
-    font-family: 'Nunito', sans-serif; 
-    background: rgb(252, 247, 152); 
-}
-h1{
+*{ 
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  
+    }
+  
+  body {
+      font-family: 'Nunito', sans-serif;
+      background:rgb(225, 246, 106);
+    }
+
+  h1{
+      text-align: center;
+      padding: 20px;
+      font-size: 40px;
+      color:black;
+  }
+  h2{
     text-align: center;
     padding: 20px;
     font-size: 40px;
-    color: black;
-}
-h2{
+    color:black;
+  }
+  
+  #dia{
     text-align: center;
-    padding: 20px;
-    font-size: 40px;
-    color: black; 
-}
-#fecha{
-    text-align: center;
-    padding: 20px;
-    font-size: 30px;
-    color: black;
+    color:black;
     font-weight: normal;
-}
-.container{
-   width: 700px;
-   background: white;
-   padding:20px ; 
-   margin: auto;
-   margin-top: 20px;
-}
-.acceso{
-    color:rgb(63, 63, 245);
-}
-.dni{
+    font-size: 50px;
+  }
+  
+  #fecha{
+    text-align: center;
+    color:black;
+    font-weight: normal;
+    font-size: 30px;
+  }
+  .container{
+    width: 700px;
+    background: white;
+    padding: 20px;
+    margin: auto;
+    margin-bottom: 20px;
+  }
+  .acceso{
+    color: rgb(0,89,255);
+  }
+
+  .dni{
     text-align: center;
     font-size: 25px;
     margin-bottom: 20px;
-}
-input{
+  }
+
+   input{
     width: 100%;
     padding: 30px;
-    /*border: none;*/
     outline: none;
-}
-.botones{
-   display: flex; 
-   margin-top: 20px;
-}
-.entrada{
-    background: rgb(60, 78, 23);
+   } 
+
+   .botones{
+    display: flex;
+    margin-top: 20px;
+   }
+
+   .entrada{
+    background: green;
     width: 100%;
-    padding:25px 35px ;
-    color: white;
+    padding: 25px 35px;
+    color:black;
     text-align: center;
     text-decoration: none;
-}
-.salida{
-    background: #f3f340;
+   }
+   
+   .salida{
+    background: rgb(233, 246, 48);
     width: 100%;
-    padding:25px 35px ;
-    color: white;
+    padding: 25px 35px;
+    color:black;
     text-align: center;
     text-decoration: none;
-}
+   }

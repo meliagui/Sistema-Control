@@ -38,7 +38,7 @@ if (!empty($_POST["btmodificar"])) {
         new PNotify({
           title:"INCORRECTO",
           type:"error",
-          text:"Los chanchos no vuelan",
+          text:"Los campos estan vacios",
           styling:"bootstrap3"
         })
       })
