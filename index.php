@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- pNotify -->
     <link href="public/pnotify/css/pnotify.css" rel="stylesheet" />
         <link href="public/pnotify/css/pnotify.buttons.css" rel="stylesheet" />
@@ -28,7 +28,6 @@
         <h1>CONTROL DE ASISTENCIA DE ALUMNOS QR-CODE </h1>
         <h2>  IE. PEDRO MERCEDES UREÑA</h2>
         <h2 id= "fecha"></h2>
-        <h3 id= "dia"></h3>
   
         <?php
         include 'modelo/conexion.php';
@@ -47,30 +46,16 @@
               </div>
           </form>
       </div>
-  
-         <script>
-            let d=new Date();
-            let dia=new Array(7);
-            dia[0]="Domingo";
-            dia[1]="Lunes";
-            dia[2]="Martes";
-            dia[3]="Miercoles";
-            dia[4]="Jueves";
-            dia[5]="Viernes";
-            dia[6]="Sabado";
-            document.write(" " + dia[d.getDay()]);
-          </script>
-    
-          <script>
-              setInterval(() => {
-              let fecha= new Date();
-              let fechaHora =fecha.toLocaleString();
-              document.getElementById("fecha").textContent=fechaHora;   
-              }, 1000);
-          </script>
+      <script>
+             //setInterval(() => {
+             let fecha= new Date();
+           //  let fechaHora =fecha.toLocaleString();
+             let fechaDia = fecha.getDay();
+             //document.getElementById("fecha").textContent=fechaHora; 
+             document.getElementById("fecha").textContent=fechaDia; 
+           // }, 1000);
+        </script>  
         
-  
-     
-  
+         
 </body>
 </html>
