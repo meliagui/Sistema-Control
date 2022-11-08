@@ -25,37 +25,67 @@
 </head>
 <body>
     
-        <h1>CONTROL DE ASISTENCIA DE ALUMNOS QR-CODE </h1>
-        <h2>  IE. PEDRO MERCEDES UREÑA</h2>
-        <h2 id= "fecha"></h2>
+     <div class="container_title">
+        <h1 class= "sistema">CONTROL DE ASISTENCIA DE ALUMNOS QR-CODE </h1>
+        <h2 class="nombre">  IE. PEDRO MERCEDES UREÑA</h2>
+      </div>
+
+      <div class="wrap">
+        <div class="widget">
+
+          <div class="fecha">
+            <p id="diaSemana" class="diaSemana"></p>
+            <p id="dia" class="dia"></p>
+            <p>de </p>
+            <p id="mes" class="mes"></p>
+            <p>del </p>
+            <p id="year" class="year"></p>
+          </div>
+
+          <div class="reloj">
+            <p id="horas" class="horas"></p>
+            <p>:</p>
+            <p id="minutos" class="minutos"></p>
+            <p>:</p>
+            <div class="caja-segundos">
+              <p id="ampm" class="ampm"></p>
+              <p id="segundos" class="segundos"></p>
+            </div>
+            
+          </div>
+          
+        </div>
+        
+        
   
         <?php
         include 'modelo/conexion.php';
         include 'controlador/controlador_registrar_asistencia.php';
         ?>
-      
-     
-      <div class= "container">
+     </div>
+         <div class="container_padre">
+         <div class= "container_QR">
+            <p class= "QR">Escanear Codigo QR</p>
+            <form class="form" action="">
+              <input class= "escanear" type="text" placeholder=" QR" name="txtqr">
+              <br>
+         </div>
+         <div class= "container_dni">
           <a class="acceso" href="vista/login/login.php">Ingresar al Sistema</a>
           <p class="dni">Ingrese su DNI</p> 
           <form class="form" action="" method="POST">
             <input type="text" placeholder=" DNI del Alumno" name="txtdni">
               <div class="botones">
+              <br>
               <button class="entrada" type="submit" name="btnentrada" value="ok">ENTRADA</button>
               <button class="salida" type="submit" name="btnsalida" value="ok">SALIDA</button>
               </div>
           </form>
-      </div>
-      <script>
-             //setInterval(() => {
-             let fecha= new Date();
-           //  let fechaHora =fecha.toLocaleString();
-             let fechaDia = fecha.getDay();
-             //document.getElementById("fecha").textContent=fechaHora; 
-             document.getElementById("fecha").textContent=fechaDia; 
-           // }, 1000);
-        </script>  
+          </div>
+         </div> 
         
-         
+          </div>  
+          
+          <script src="./vista/login/js/reloj.js"></script>
 </body>
 </html>

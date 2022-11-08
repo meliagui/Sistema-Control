@@ -1,7 +1,7 @@
 (function(){
 
-   var actualizarHora = function(){
-    var fecha = new Date(),
+    var actualizarHora = function(){
+        var fecha = new Date(),
         horas = fecha.getHours(),
         ampm,
         minutos = fecha.getMinutes(),
@@ -22,9 +22,39 @@
         pMes = document.getElementById('mes'),
         pYear = document.getElementById('year');
 
-    //var semana = ['Domingo', 'Lunes', 'Martes','Miercoles','Jueves','Viernes','Sabado'];
-    pDiaSemana.textContent = diaSemana;
-};
-actualizarHora();
+    var semana = ['Domingo', 'Lunes', 'Martes','Miercoles','Jueves','Viernes','Sabado'];
+    pDiaSemana.textContent = semana[diaSemana];
 
-}())
+    pDia.textContent = dia;
+
+    var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octuber', 'Noviembre', 'Diciembre'];
+    pMes.textContent = meses[mes];
+
+    pYear.textContent = year;
+
+    if (horas >= 12) {
+       horas = horas - 12;
+       ampm = 'PM';
+    }else{
+       ampm = 'AM';
+    }
+    if (horas == 0) {
+       horas = 12;
+    };
+
+    pHoras.textContent = horas;
+    pAMPM.textContent = ampm;
+
+    if (minutos < 10) {minutos = "0" + minutos };
+    if (segundos < 10) {segundos = "0" + segundos };
+    
+
+    pMinutos.textContent = minutos;
+    pSegundos.textContent = segundos;
+    
+    };
+ actualizarHora();
+ var intervalo = setInterval(actualizarHora, 1000);
+ 
+ }())
+ 
