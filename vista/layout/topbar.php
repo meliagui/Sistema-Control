@@ -124,9 +124,15 @@
                     <div class="site-header-content-in">
                         <div class="site-header-shown">
 
+                        <div class="dropdown dropdown-notification title-school">
+                            
+                                
+                            </div>
+
                             <div class="dropdown dropdown-notification">
+                            
                                 <h6 class="text-light mt-2">
-                                    Administrador
+                                   Administrador
                                 </h6>
                             </div>
 

@@ -6,8 +6,8 @@
 
 ?>
 <style> 
-  ul li:nth-child(2) .activo{
-    background: rgb(11, 150, 214) !important;
+  ul li:nth-child(4) .activo{
+    background: #f3f340 !important;
   }
   </style>
 
@@ -38,6 +38,7 @@
           <th scope="col">NOMBRE</th>
           <th scope="col">APELLIDO</th>
           <th scope="col">USUARIO</th>
+          <th scope="col">ESTADO</th>
           <th></th>
         </tr>
       </thead>
@@ -49,6 +50,7 @@
             <td><?= $datos->nombre?></td>
             <td><?= $datos->apellido ?></td>
             <td><?= $datos->usuario?></td>
+            <td><?= $datos->estado?></td>
             <td>
               <a href="" data-toggle="modal" data-target="#exampleModal<?= $datos->id_usuario ?>" class="btn btn-warning btn-sm"><i class="fa-solid  fa-pen-to-square"></i></a>
               <a href="usuario.php?id=<?=$datos->id_usuario ?>" onclick= "advertencia(event)" class= "btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
@@ -79,7 +81,10 @@
     </div>
     <div class="fl-flex-label mb-4 px-2 col-12 ">
       <input type="text" placeholder="Usuario" class="input input__text" name="txtusuario" value="<?= $datos->usuario ?>">
-    
+      </div>
+    <div class="fl-flex-label mb-4 px-2 col-12 ">
+      <input type="text" placeholder="Estado" class="input input__text" name="txtestado" value="<?= $datos->estado ?>">
+
     <div class="text-right p-2">
       <a href="usuario.php" class="btn btn-secondary btn-rounded">Atras</a>
       <button type="submit" value="ok" name="btmodificar" class="btn btn-primary btn-rounded">Modificar</button>

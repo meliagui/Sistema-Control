@@ -1,12 +1,9 @@
 <?php
 if (!empty($_POST["btnregistrar"])) {
-    if (!empty($_POST["txtnombre"]) and !empty($_POST["txtapellidos"]) and !empty($_POST["txtdni"]) and !empty($_POST["txtnivel"]) and !empty($_POST["txtgrado"]) and !empty($_POST["txtseccion"])) {
+    if (!empty($_POST["txtnombre"]) and !empty($_POST["txtapellidos"]) and !empty($_POST["txtdni"])) {
         $nombre=$_POST["txtnombre"];
         $apellidos=$_POST["txtapellidos"];
         $dni=$_POST["txtdni"];
-        $nivel=$_POST["txtnivel"];
-        $grado=$_POST["txtgrado"];
-        $seccion=$_POST["txtseccion"];
 
         $sql=$conexion->query ("select count(*) as 'total' from alumno where dni='$dni' ");
         if ($sql->fetch_object()->total>0) { ?>
@@ -21,7 +18,7 @@ if (!empty($_POST["btnregistrar"])) {
       })
     </script>
         <?php } else {
-            $sql=$conexion->query("insert into alumno (nombre, apellidos,dni,id_nivel,id_grado,id_seccion) values('$nombre','$apellidos','$dni','$nivel','$grado','$seccion')");
+            $sql=$conexion->query("insert into alumno (nombre, apellidos,dni) values('$nombre','$apellidos','$dni')");
             if ($sql==true) {?>
     <script>
       $(function notificacion(){

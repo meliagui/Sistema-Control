@@ -5,6 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistema de Control de Asistencia</title>
+  <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
+        <script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+        <script type="text/javascript " src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <link rel="stylesheet" href="public/estilos/estilos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,7 +54,7 @@
               <p id="ampm" class="ampm"></p>
               <p id="segundos" class="segundos"></p>
             </div>
-            
+
           </div>
           
         </div>
@@ -64,28 +67,31 @@
         ?>
      </div>
          <div class="container_padre">
+
          <div class= "container_QR">
             <p class= "QR">Escanear Codigo QR</p>
-            <form class="form" action="">
-              <input class= "escanear" type="text" placeholder=" QR" name="txtqr">
-              <br>
+             <video class="video" id="preview"></video>
          </div>
+
          <div class= "container_dni">
-          <a class="acceso" href="vista/login/login.php">Ingresar al Sistema</a>
-          <p class="dni">Ingrese su DNI</p> 
-          <form class="form" action="" method="POST">
-            <input type="text" placeholder=" DNI del Alumno" name="txtdni">
-              <div class="botones">
-              <br>
-              <button class="entrada" type="submit" name="btnentrada" value="ok">ENTRADA</button>
-              <button class="salida" type="submit" name="btnsalida" value="ok">SALIDA</button>
+           <p class="dni">Ingrese su DNI</p> 
+
+           <form class="form" action="" method="POST">
+             <input type="text" id="dni" placeholder=" DNI del Alumno" name="txtdni">
+             <div class="botones">
+               <button class="entrada" type="submit" name="btnentrada" value="ok">ENTRADA</button>
+               <button class="salida" type="submit" name="btnsalida" value="ok">SALIDA</button>
               </div>
-          </form>
-          </div>
+
+            </form>
+
+          <a class="acceso" href="vista/login/login.php">Ingresar al Sistema</a>
          </div> 
+
         
           </div>  
           
           <script src="./vista/login/js/reloj.js"></script>
+          <script src="./vista/login/js/qr.js"></script>
 </body>
 </html>

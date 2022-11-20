@@ -7,8 +7,8 @@ if (!empty($_POST["txtdni"])) {
   if ($consulta->fetch_object()-> total > 0) {
        $fecha=date("Y-m-d");
        $hora=date("h:i:s");
-       $id_matricula=$id->fetch_object()->id_matricula;
-       $sql=$conexion->query("insert into asistencia (fecha, entrada,id_matricula) values ( '$fecha', '$hora',$id_matricula) ");
+       $id_alumno=$id->fetch_object()->id_alumno;
+       $sql=$conexion->query("insert into asistencia (id_alumno,fecha, entrada) values ($id_alumno, '$fecha', '$hora') ");
           if ($sql==true) { ?>
           
           <script>

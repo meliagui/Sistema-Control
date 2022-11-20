@@ -1,10 +1,11 @@
 <?php
 if (!empty($_POST["btnregistrar"])) {
-    if (!empty($_POST["txtnombre"]) and !empty($_POST["txtapellido"]) and !empty($_POST["txtusuario"]) and !empty($_POST["txtpassword"])) {
+    if (!empty($_POST["txtnombre"]) and !empty($_POST["txtapellido"]) and !empty($_POST["txtusuario"]) and !empty($_POST["txtpassword"]) and !empty($_POST["txtestado"])) {
         $nombre=$_POST["txtnombre"];
         $apellido=$_POST["txtapellido"];
         $usuario=$_POST["txtusuario"];
         $password=md5($_POST["txtpassword"]);
+        $estado=($_POST["txtestado"]);
 
         $sql=$conexion->query ("select count(*) as 'total' from usuario where usuario='$usuario' ");
         if ($sql->fetch_object()->total>0) { ?>
@@ -19,7 +20,7 @@ if (!empty($_POST["btnregistrar"])) {
       })
     </script>
         <?php } else {
-            $registro=$conexion->query("insert into usuario (nombre, apellido,usuario,password) values('$nombre','$apellido','$usuario','$password')");
+            $registro=$conexion->query("insert into usuario (nombre, apellido,usuario,password,estado) values('$nombre','$apellido','$usuario','$password','$estado')");
             if ($registro==true) {?>
     <script>
       $(function notificacion(){

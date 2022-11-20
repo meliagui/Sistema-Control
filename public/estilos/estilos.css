@@ -80,25 +80,33 @@ body {
  }
 }
 .form{
-  width: 500px;
+  margin-top: 2rem;
 }
 
 
 .container_padre{
     width: 100vw;
-    height: 65vh;
+    /* height: 65vh; */
     background: rgb(234, 253, 142);
     padding: 10px;
-    margin: auto;
+    margin-top: 2rem;
     display: flex;
     justify-content: space-around;
 }
 
 .container_QR{
   width: 50vw;
+  display: flex;
   align-items: center;
+  justify-content: start;
   flex-direction: column;
 
+
+}
+
+.video {
+  width: 65%;
+  border: 7px solid black;
 }
 .QR{
   text-align: center;
@@ -125,7 +133,9 @@ body {
 
 .container_dni{
   width: 50vw;
+  display: flex;
   align-items: center;
+  justify-content: start;
   flex-direction: column;
 
 }
@@ -140,7 +150,7 @@ body {
   display: flex;
   justify-content:center ;
   align-items:center ;
-  margin: 0 auto;
+  margin: 3rem auto;
  
 }
 
@@ -162,11 +172,18 @@ input{
   text-align: center;
   justify-content:center ;
   align-items:center ;
-  margin-left: 150px;
+  /* margin-left: 150px; */
+}
+
+.title-school{
+  padding-right: 5rem;
+  width: 20rem;
 }
 
 .botones{
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
   margin-top: 20px;
 }
 
@@ -177,7 +194,7 @@ input{
   text-align: center;
   text-decoration: none;
   padding: 20px;
-  margin-left: 150px;
+  /* margin-left: 150px; */
 }
 
 

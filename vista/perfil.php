@@ -29,14 +29,17 @@ $id=$_SESSION["id"];
      <div hidden class="fl-flex-label mb-4 px-2 col-12 col-md-6">
     <input type="text" placeholder="ID" class="input input__text" name="txtid" value="<?= $datos->id_usuario?> ">
     </div>
-    <div class="fl-flex-label mb-4 px-2 col-12 col-md-6">
+    <div class="fl-flex-label mb-4 px-2 col-12 col-md-6 ">
     <input type="text" placeholder="Nombre" class="input input__text" name="txtnombre" value="<?= $datos->nombre?> ">
     </div>
-    <div class="fl-flex-label mb-4 px-2 col-12 col-md-6">
+    <div class="fl-flex-label mb-4 px-2 col-12  col-md-6">
       <input type="text" placeholder="Apellido" class="input input__text" name="txtapellido" value="<?= $datos->apellido?> ">
     </div>
-    <div class="fl-flex-label mb-4 px-2 col-12 col-md-6">
+    <div class="fl-flex-label mb-4 px-2 col-12  col-md-6">
       <input type="text" placeholder="Usuario" class="input input__text" name="txtusuario" value="<?= $datos->usuario?> ">
+    </div>
+    <div class="fl-flex-label mb-4 px-2 col-12  col-md-6">
+      <input type="text" placeholder="Estado" class="input input__text" name="txtestado" value="<?= $datos->estado?> ">
     </div>
     <div class="text-right p-2">
       <button type="submit" value="ok" name="btnmodificar" class="btn btn-primary btn-rounded">Modificar</button>

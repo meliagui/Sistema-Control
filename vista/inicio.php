@@ -7,7 +7,7 @@
 ?>
 <style> 
   ul li:nth-child(1) .activo{
-    background: rgb(11, 150, 214) !important;
+    background: #f3f340 !important;
   }
   </style>
 
@@ -25,25 +25,35 @@
     include "../modelo/conexion.php";
     include "../controlador/controlador_eliminar_asistencia.php";
     $sql=$conexion->query("SELECT
-
-    dbcontrol.asistencia.id_asistencia,
-    dbcontrol.asistencia.id_alumno, 
-    dbcontrol.asistencia.fecha, 
-    dbcontrol.asistencia.entrada, 
-    dbcontrol.asistencia.salida, 
-    dbcontrol.alumno.id_alumno, 
-    dbcontrol.alumno.nombre, 
-    dbcontrol.alumno.apellidos, 
-    dbcontrol.alumno.dni, 
-    dbcontrol.alumno.id_nivel, 
-    dbcontrol.alumno.id_grado, 
-    dbcontrol.alumno.id_seccion
+    
+    asistencia.id_asistencia, 
+    asistencia.fecha, 
+    asistencia.entrada, 
+    asistencia.salida, 
+    asistencia.id_matricula, 
+    matricula.id_matricula, 
+    matricula.id_alumno, 
+    alumno.id_alumno, 
+    alumno.nombre, 
+    alumno.dni, 
+    alumno.apellidos
   FROM
-    dbcontrol.asistencia
-    INNER JOIN dbcontrol.alumno ON dbcontrol.asistencia.id_alumno = dbcontrol.alumno.id_alumno");
+    matricula
+    INNER JOIN
+    alumno
+    ON 
+      matricula.id_alumno = alumno.id_alumno
+    INNER JOIN
+    asistencia
+    ON 
+      matricula.id_matricula = asistencia.id_matricula");
 
     ?>
+    <div class="text-left mb-2">
 
+     <a href="fpdf/ReporteAsistencia.php" target= "_blank"class="btn btn-success"> <i class="fas fa-file-pdf"></i>GENERAR REPORTES</a>
+
+    </div>
    <table class="table table-bordered table-striped border-primary w-100" id="example">
       <thead>
         <tr>

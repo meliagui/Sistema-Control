@@ -6,13 +6,13 @@
 
 ?>
 <style> 
-  ul li:nth-child(3) .activo{
-    background: rgb(11, 150, 214) !important;
+  ul li:nth-child(2) .activo{
+    background: #f3f340 !important;
   }
   </style>
 
 <!-- primero se carga el topbar -->
-<?php require('./layout/topbar.php'); ?>
+<?php require('./layout/topbar.php'); ?>\Sistema-Control\vista\usuario.php
 <!-- luego se carga el sidebar -->
 <?php require('./layout/sidebar.php'); ?>
 
@@ -26,24 +26,9 @@
     include "../controlador/controlador_modificar_alumno.php";
     include "../controlador/controlador_eliminar_alumno.php";
 
-    $sql=$conexion->query("SELECT
 
-    dbcontrol.alumno.id_alumno, 
-    dbcontrol.alumno.nombre, 
-    dbcontrol.alumno.apellidos, 
-    dbcontrol.alumno.dni,
-    dbcontrol.alumno.id_nivel, 
-    dbcontrol.alumno.id_grado, 
-    dbcontrol.alumno.id_seccion, 
-    dbcontrol.nivel.nombre as 'nom_nivel', 
-    dbcontrol.grado.nombre as 'nom_grado', 
-    dbcontrol.seccion.nombre as 'nom_seccion'
-  FROM
-    dbcontrol.alumno
-    INNER JOIN dbcontrol.nivel ON dbcontrol.alumno.id_nivel = dbcontrol.nivel.id_nivel
-    INNER JOIN dbcontrol.grado ON dbcontrol.alumno.id_grado = dbcontrol.grado.id_grado
-    INNER JOIN dbcontrol.seccion ON dbcontrol.alumno.id_seccion = dbcontrol.seccion.id_seccion");
-
+    $sql=$conexion->query("SELECT * from alumno");
+     
     
     ?>
    <a href="registro_alumno.php" class="btn btn-primary btn-rounded mb-2"><i class="fa-solid fa-plus"></i> &nbsp;Registrar</a>
@@ -54,9 +39,6 @@
           <th scope="col">NOMBRE</th>
           <th scope="col">APELLIDOS</th>
           <th scope="col">DNI</th>
-          <th scope="col">NIVEL</th>
-          <th scope="col">GRADO</th>
-          <th scope="col">SECCIÓN</th>
           <th></th>
         </tr>
       </thead>
@@ -68,9 +50,6 @@
             <td><?= $datos->nombre?></td>
             <td><?= $datos->apellidos?></td>
             <td><?= $datos->dni?></td>
-            <td><?= $datos->nom_nivel?></td>
-            <td><?= $datos->nom_grado?></td>
-            <td><?= $datos->nom_seccion?></td>
             <td>
               <a href="" data-toggle="modal" data-target="#exampleModal<?= $datos->id_alumno ?>" class="btn btn-warning btn-sm"><i class="fa-solid  fa-pen-to-square"></i></a>
               <a href="alumno.php?id= <?= $datos->id_alumno ?>" onclick= "advertencia(event)" class= "btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
@@ -102,36 +81,7 @@
     <div class="fl-flex-label mb-4 px-2 col-12 ">
       <input type="text" placeholder="DNI" class="input input__text" name="txtdni" value="<?= $datos->dni ?>">
       </div>
-      <div class="fl-flex-label mb-4 px-2 col-12 ">
-      <select name="txtnivel" class="input input__select">
-        <?php
-        $sql2 = $conexion->query("select * from nivel");
-        while ($datos2 = $sql2->fetch_object()) { ?>
-        <option <?= $datos->id_nivel==$datos2->id_nivel ? 'selected' : '' ?> value="<?= $datos2->id_nivel ?>"><?= $datos2->nombre ?></option>
-        <?php }
-        ?>
-      </select>
-      </div>
-      <div class="fl-flex-label mb-4 px-2 col-12 ">
-      <select name="txtgrado" class="input input__select">
-        <?php
-        $sql2 = $conexion->query("select * from grado");
-        while ($datos2 = $sql2->fetch_object()) { ?>
-        <option <?= $datos->id_grado==$datos2->id_grado ? 'selected' : '' ?> value="<?= $datos2->id_grado ?>"><?= $datos2->nombre ?></option>
-        <?php }
-        ?>
-      </select>
-      </div>
-      <div class="fl-flex-label mb-4 px-2 col-12 ">
-      <select name="txtseccion" class="input input__select">
-        <?php
-        $sql2 = $conexion->query("select * from seccion");
-        while ($datos2 = $sql2->fetch_object()) { ?>
-        <option <?= $datos->id_seccion==$datos2->id_seccion ? 'selected' : '' ?> value="<?= $datos2->id_seccion ?>"><?= $datos2->nombre ?></option>
-        <?php }
-        ?>
-      </select>
-      </div>
+      
     <div class="text-right p-2">
       <a href="alumno.php" class="btn btn-secondary btn-rounded">Atras</a>
       <button type="submit" value="ok" name="btmodificar" class="btn btn-primary btn-rounded">Modificar</button>
