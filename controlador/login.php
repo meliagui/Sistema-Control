@@ -10,7 +10,7 @@ if (!empty($_POST["btningresar"])) {
        $_SESSION["nombre"]=$datos->nombre;
        $_SESSION["apellido"]=$datos->apellido;
        $_SESSION["id"]=$datos->id_usuario;
-       header("location:../inicio.php");
+      // header("location:../inicio.php");
     } else {
         echo "<div class='alert-danger'>El usuario no existe</div>";
     }
