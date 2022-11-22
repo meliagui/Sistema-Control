@@ -6,7 +6,7 @@
 
 ?>
 <style>
-  ul li:nth-child(3) .activo{
+  ul li:nth-child(2) .activo{
     background: rgb(11, 150, 214) !important;
   }
   </style>
@@ -37,7 +37,7 @@
       <input type="text" placeholder="DNI" class="input input__text" name="txtdni">
     </div>
 
-    <div class="text-right p-2 ">
+    <div class="text-right p-2 mb-4">
       <a href="alumno.php" class="btn btn-secondary btn-rounded">Atras</a>
       <button type="submit" value="ok" name="btnregistrar" class="btn btn-primary btn-rounded">Registrar</button>
 

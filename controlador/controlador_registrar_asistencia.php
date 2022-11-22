@@ -2,13 +2,13 @@
 if(!empty($_POST["btnentrada"])){
 if (!empty($_POST["txtdni"])) {
   $dni=$_POST["txtdni"];
-  $consulta=$conexion->query( "select count(*) as 'total' from alumno where dni='$dni' ");
-  $id=$conexion->query( "select id_alumno from alumno where dni='$dni' ");
+  $consulta=$conexion->query( "select count(*) as 'total' from   alumno a  inner join matricula m on a.id_alumno=m.id_alumno where a.dni='$dni' ");
+  $id=$conexion->query( "select m.id_matricula from   alumno a  inner join matricula m on a.id_alumno=m.id_alumno where a.dni='$dni' ");
   if ($consulta->fetch_object()-> total > 0) {
        $fecha=date("Y-m-d");
        $hora=date("h:i:s");
        $id_matricula=$id->fetch_object()->id_matricula;
-       $sql=$conexion->query("insert into asistencia (fecha, entrada,id_matricula) values ( '$fecha', '$hora',$id_matricula) ");
+       $sql=$conexion->query("insert into asistencia (id_matricula,fecha, entrada) values ('$id_matricula', '$fecha', '$hora') ");
           if ($sql==true) { ?>
           
           <script>
@@ -75,13 +75,13 @@ if (!empty($_POST["txtdni"])) {
 if(!empty($_POST["btnsalida"])){
 if (!empty($_POST["txtdni"])) {
   $dni=$_POST["txtdni"];
-  $consulta=$conexion->query( "select count(*) as 'total' from alumno where dni='$dni' ");
-  $id=$conexion->query( "select id_alumno from alumno where dni='$dni' ");
+  $consulta=$conexion->query( "select count(*) as 'total' from   alumno a  inner join matricula m on a.id_alumno=m.id_alumno where a.dni='$dni' ");
+  $id=$conexion->query( "select m.id_matricula from   alumno a  inner join matricula m on a.id_alumno=m.id_alumno where a.dni='$dni' ");
   if ($consulta->fetch_object()-> total > 0) {
     $hora=date("h:i:s"); 
-    $id_alumno=$id->fetch_object()->id_alumno;
+    $id_matricula=$id->fetch_object()->id_matricula;
 
-   $busqueda=$conexion->query("select id_asistencia from asistencia where id_alumno=$id_alumno order by id_asistencia desc limit 1");
+   $busqueda=$conexion->query("select id_asistencia from asistencia where id_matricula=$id_matricula order by id_asistencia desc limit 1");
     $id_asistencia=$busqueda->fetch_object()->id_asistencia;
    $sql=$conexion->query("update asistencia set salida='$hora' where id_asistencia=$id_asistencia ");
     if ($sql==true) { ?>

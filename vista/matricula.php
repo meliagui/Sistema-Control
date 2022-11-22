@@ -71,19 +71,17 @@
   
     
     ?>
-   <a href="registro_alumno.php" class="btn btn-primary btn-rounded mb-2"><i class="fa-solid fa-plus"></i> &nbsp;Registrar</a>
+   <a href="registro_matricula.php" class="btn btn-primary btn-rounded mb-2"><i class="fa-solid fa-plus"></i> &nbsp;Registrar</a>
    <table class="table table-bordered table-striped border-primary w-100" id="example">
       <thead>
         <tr>
           <th scope="col">ID</th>
-          <th scope="col">NOMBRE</th>
-          <th scope="col">APELLIDOS</th>
-          <th scope="col">DNI</th>
-          <th scope="col">FECHA</th>
-          <th scope="col">TURNO</th>
+          <th scope="col">NOMBRE COMPLETO</th>
           <th scope="col">NIVEL</th>
           <th scope="col">GRADO</th>
           <th scope="col">SECCION</th>
+          <th scope="col">FECHA</th>
+          <th scope="col">TURNO</th>
           <th scope="col">H.ENTRADA</th>
           <th scope="col">H.SALIDA</th>
           <th></th>
@@ -94,14 +92,12 @@
       while($datos=$sql->fetch_object()) {?>
         <tr>
             <th><?= $datos->id_matricula ?></th>
-            <td><?= $datos->nombre?></td>
-            <td><?= $datos->apellidos?></td>
-            <td><?= $datos->dni?></td>
-            <td><?= $datos->fecha_matricula?></td>
-            <td><?= $datos->turno?></td>
+            <td><?= $datos->nombre. " ".$datos->apellidos?></td>
             <td><?= $datos->desc_nivel?></td>
             <td><?= $datos->desc_grado?></td>
             <td><?= $datos->desc_seccion?></td>
+            <td><?= $datos->fecha_matricula?></td>
+            <td><?= $datos->turno?></td>
             <td><?= $datos->hora_entrada?></td>
             <td><?= $datos->hora_salida?></td>
 
@@ -128,30 +124,26 @@
       <input type="text" placeholder="ID" class="input input__text" name="txtid" value="<?= $datos->id_matricula ?>">
     </div>
     <div class="fl-flex-label mb-4 px-2 col-12 ">
-      <input type="text" placeholder="Nombre" class="input input__text" name="txtnombre" value="<?= $datos->nombre?>">
-    </div>
-    <div class="fl-flex-label mb-4 px-2 col-12 ">
-      <input type="text" placeholder="Apellidos" class="input input__text" name="txtapellidos" value="<?= $datos->apellidos?>">
-    </div>
-    <div class="fl-flex-label mb-4 px-2 col-12 ">
-      <input type="text" placeholder="DNI" class="input input__text" name="txtdni" value="<?= $datos->dni?>">
-    </div>
-    <div class="fl-flex-label mb-4 px-2 col-12 ">
-      <input type="text" placeholder="Fecha" class="input input__text" name="txtfecha" value="<?= $datos->fecha_matricula ?>">
-      </div>
-      <div class="fl-flex-label mb-4 px-2 col-12 ">
-      <input type="text" placeholder="Turno" class="input input__text" name="txtturno" value="<?= $datos->turno?>">
+      <select name="txtalumno" class="input input__select">
+        <?php
+        $sql2 = $conexion->query("select * from alumno");
+        while ($datos2 = $sql2->fetch_object()) { ?>
+        <option <?= $datos->id_alumno==$datos2->id_alumno ? 'selected' : '' ?> value="<?= $datos2->id_alumno ?>"><?= $datos2->nombre. " ".$datos->apellidos?></option>
+        <?php }
+        ?>
+      </select>
       </div>
       <div class="fl-flex-label mb-4 px-2 col-12 ">
       <select name="txtnivel" class="input input__select">
         <?php
         $sql2 = $conexion->query("select * from nivel");
         while ($datos2 = $sql2->fetch_object()) { ?>
-        <option <?= $datos->id_nivel==$datos2->id_nivel ? 'selected' : '' ?> value="<?= $datos2->id_nivel ?>"><?= $datos2->descripcion?></option>
+        <option <?= $datos->id_nivel==$datos2->id_nivel ? 'selected' : '' ?> value="<?= $datos2->id_nivel ?>"><?= $datos2->descripcion ?></option>
         <?php }
         ?>
       </select>
       </div>
+    
       <div class="fl-flex-label mb-4 px-2 col-12 ">
       <select name="txtgrado" class="input input__select">
         <?php
@@ -171,6 +163,13 @@
         <?php }
         ?>
       </select>
+      </div>
+      <div class="fl-flex-label mb-4 px-2 col-12 ">
+      <input type="text" placeholder="Fecha" class="input input__text" name="txtfecha" value="<?= $datos->fecha_matricula ?>">
+      </div>
+      
+      <div class="fl-flex-label mb-4 px-2 col-12 ">
+      <input type="text" placeholder="Turno" class="input input__text" name="txtturno" value="<?= $datos->turno?>">
       </div>
       <div class="fl-flex-label mb-4 px-2 col-12 ">
       <input type="text" placeholder="HoraEntrada" class="input input__text" name="txthoraentrada" value="<?= $datos->hora_entrada?>">
