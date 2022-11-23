@@ -1,5 +1,5 @@
 <?php
-session_start();
+ob_start();
 if (!empty($_POST["btningresar"])) {
     if (!empty($_POST["usuario"]) and !empty($_POST["usuario"]) ) {
     $usuario=$_POST["usuario"];
@@ -9,7 +9,6 @@ if (!empty($_POST["btningresar"])) {
        $_SESSION["nombre"]=$datos->nombre;
        $_SESSION["apellido"]=$datos->apellido;
        $_SESSION["id"]=$datos->id_usuario;
-       echo "this is output";
       header("location:../inicio.php");
     } else {
         echo "<div class='alert-danger'>El usuario no existe</div>";
@@ -19,4 +18,5 @@ if (!empty($_POST["btningresar"])) {
         echo "<div class='alert-danger'>Los campos estan vacios</div>";
     }
 }
+ob_end_flush();
 ?>
