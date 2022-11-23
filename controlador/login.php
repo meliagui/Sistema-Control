@@ -1,6 +1,5 @@
 <?php
-
-
+ob_start();
 if (!empty($_POST["btningresar"])) {
     if (!empty($_POST["usuario"]) and !empty($_POST["usuario"]) ) {
     $usuario=$_POST["usuario"];
@@ -18,7 +17,6 @@ if (!empty($_POST["btningresar"])) {
 } else {
         echo "<div class='alert-danger'>Los campos estan vacios</div>";
     }
-    
-    # code...
 }
+ob_end_flush();
 ?>
