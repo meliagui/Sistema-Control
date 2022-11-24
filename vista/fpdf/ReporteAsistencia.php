@@ -112,7 +112,7 @@ while ($datos_reporte = $consulta_reporte_asistencia->fetch_object()) {
    $pdf->Cell(13, 10, utf8_decode($i), 1, 0, 'C', 0);
    $pdf->Cell(60, 10, utf8_decode($datos_reporte->nombre. " " .$datos_reporte->apellidos), 1, 0, 'C', 0);
    $pdf->Cell(30, 10, utf8_decode($datos_reporte->dni), 1, 0, 'C', 0);
-   $pdf->Cell(25, 10, utf8_decode($datos_reporte->fecha), 1, 0, 'C', 0);
+   $pdf->Cell(25, 10, utf8_decode(date('d/m/Y' , strtotime($datos_reporte->fecha))), 1, 0, 'C', 0);
    $pdf->Cell(20, 10, utf8_decode($datos_reporte->entrada), 1, 0, 'C', 0);
    $pdf->Cell(20, 10, utf8_decode($datos_reporte->salida), 1, 0, 'C', 0);
    $pdf->Cell(25, 10, utf8_decode($datos_reporte->tardanza), 1, 1, 'C', 0);

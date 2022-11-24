@@ -91,7 +91,7 @@ if (empty($_SESSION['nombre']) and empty($_SESSION['apellido'])) {
           <th><?= $datos->id_asistencia ?></th>
           <td><?= $datos->nombre . " " . $datos->apellidos ?></td>
           <td><?= $datos->dni ?></td>
-          <td><?= $datos->fecha ?></td>
+          <td><?=  date('d/m/Y' , strtotime($datos->fecha)) ?></td>
           <td><?= $datos->entrada ?></td>
           <td><?= $datos->salida ?></td>
           <td><?= $datos->tardanza ?></td>

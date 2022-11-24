@@ -96,7 +96,7 @@
             <td><?= $datos->desc_nivel?></td>
             <td><?= $datos->desc_grado?></td>
             <td><?= $datos->desc_seccion?></td>
-            <td><?= $datos->fecha_matricula?></td>
+            <td><?=  date('d/m/Y' , strtotime($datos->fecha_matricula)) ?></td>
             <td><?= $datos->turno?></td>
             <td><?= $datos->hora_entrada?></td>
             <td><?= $datos->hora_salida?></td>
