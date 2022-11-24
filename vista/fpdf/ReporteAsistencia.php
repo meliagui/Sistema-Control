@@ -46,7 +46,18 @@ class PDF extends FPDF
       $this->Cell(50); // mover a la derecha
       $this->SetFont('Arial', 'B', 15);
       $this->Cell(100, 10, utf8_decode("REPORTE DE ASISTENCIAS "), 0, 1, 'C', 0);
-      $this->Ln(7);
+      $this->Ln(2);
+
+      
+      // FILTROS DESDE - HASTA
+      $fechainicio = empty($_GET['fInicio']) ? date('Y-m-01') : $_GET['fInicio'];
+      $fechafinal = empty($_GET['fFinal']) ? date('Y-m-t') : $_GET['fFinal'];
+      
+      $this->SetTextColor(0, 0, 0);
+      $this->Cell(50); // mover a la derecha
+      $this->SetFont('Arial', 'B', 11);
+      $this->Cell(100, 10, utf8_decode("Desde: " . date('d/m/Y', strtotime($fechainicio)) . '  Hasta: ' . date('d/m/Y', strtotime($fechafinal))), 0, 1, 'C', 0);
+      $this->Ln(1);
 
       /* CAMPOS DE LA TABLA */
       //color
@@ -57,9 +68,10 @@ class PDF extends FPDF
       $this->Cell(13, 10, utf8_decode('N°'), 1, 0, 'C', 1);
       $this->Cell(60, 10, utf8_decode('ALUMNO'), 1, 0, 'C', 1);
       $this->Cell(30, 10, utf8_decode('DNI'), 1, 0, 'C', 1);
-      $this->Cell(30, 10, utf8_decode('FECHA'), 1, 0, 'C', 1);
-      $this->Cell(30, 10, utf8_decode('ENTRADA'), 1, 0, 'C', 1);
-      $this->Cell(30, 10, utf8_decode('SALIDA'), 1, 1, 'C', 1);
+      $this->Cell(25, 10, utf8_decode('FECHA'), 1, 0, 'C', 1);
+      $this->Cell(20, 10, utf8_decode('ENTRADA'), 1, 0, 'C', 1);
+      $this->Cell(20, 10, utf8_decode('SALIDA'), 1, 0, 'C', 1);
+      $this->Cell(25, 10, utf8_decode('TARDANZA'), 1, 1, 'C', 1);
    }
 
    // Pie de página
@@ -84,9 +96,15 @@ $i = 0;
 $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
 
-$consulta_reporte_asistencia = $conexion->query("select asistencia.fecha,asistencia.entrada,asistencia.salida,alumno.dni,alumno.nombre,alumno.apellidos from asistencia
+
+// FILTROS DESDE - HASTA
+$fechainicio = empty($_GET['fInicio']) ? date('Y-m-01') : $_GET['fInicio'];
+$fechafinal = empty($_GET['fFinal']) ? date('Y-m-t') : $_GET['fFinal'];
+
+$consulta_reporte_asistencia = $conexion->query("select asistencia.fecha,asistencia.entrada,asistencia.salida,tardanza,alumno.dni,alumno.nombre,alumno.apellidos from asistencia
 inner join matricula on asistencia.id_matricula= matricula.id_matricula
-inner join alumno on matricula.id_alumno=alumno.id_alumno ");
+inner join alumno on matricula.id_alumno=alumno.id_alumno 
+WHERE (fecha BETWEEN '$fechainicio' AND '$fechafinal')");
 
 while ($datos_reporte = $consulta_reporte_asistencia->fetch_object()) {    
    $i = $i + 1;
@@ -94,11 +112,13 @@ while ($datos_reporte = $consulta_reporte_asistencia->fetch_object()) {
    $pdf->Cell(13, 10, utf8_decode($i), 1, 0, 'C', 0);
    $pdf->Cell(60, 10, utf8_decode($datos_reporte->nombre. " " .$datos_reporte->apellidos), 1, 0, 'C', 0);
    $pdf->Cell(30, 10, utf8_decode($datos_reporte->dni), 1, 0, 'C', 0);
-   $pdf->Cell(30, 10, utf8_decode($datos_reporte->fecha), 1, 0, 'C', 0);
-   $pdf->Cell(30, 10, utf8_decode($datos_reporte->entrada), 1, 0, 'C', 0);
-   $pdf->Cell(30, 10, utf8_decode($datos_reporte->salida), 1, 1, 'C', 0);
+   $pdf->Cell(25, 10, utf8_decode($datos_reporte->fecha), 1, 0, 'C', 0);
+   $pdf->Cell(20, 10, utf8_decode($datos_reporte->entrada), 1, 0, 'C', 0);
+   $pdf->Cell(20, 10, utf8_decode($datos_reporte->salida), 1, 0, 'C', 0);
+   $pdf->Cell(25, 10, utf8_decode($datos_reporte->tardanza), 1, 1, 'C', 0);
    }
 
 
 
 $pdf->Output('Prueba.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
+
