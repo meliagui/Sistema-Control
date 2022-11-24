@@ -1,155 +1,114 @@
 <?php
- session_start();
-if (!empty($_POST["btnentrada"])) {
-  if (!empty($_POST["txtdni"])) {
-    $dni = $_POST["txtdni"];
-    $consulta = $conexion->query("select count(*) as 'total' from   alumno a  inner join matricula m on a.id_alumno=m.id_alumno where a.dni='$dni' ");
-    $id = $conexion->query("select m.id_matricula from   alumno a  inner join matricula m on a.id_alumno=m.id_alumno where a.dni='$dni' ");
-    $horaEntrada = $conexion->query("select m.hora_entrada from alumno a  inner join matricula m on a.id_alumno=m.id_alumno where a.dni='$dni' ");
-    if ($consulta->fetch_object()->total > 0) {
-      $fecha = date("Y-m-d");
-      $hora = date("H:i:s");
-      $id_matricula = $id->fetch_object()->id_matricula;
-      $hora_Entrada = $horaEntrada->fetch_object()->hora_entrada;
-      $tardanza = null;
-      //  Obtenemos la tardanza
-      if (strtotime($hora) > strtotime("+15 minutes", strtotime($hora_Entrada))) {
-        $inicio = new DateTime($hora);
-        $fin = new DateTime(date('H:i:s', strtotime("+15 minutes", strtotime($hora_Entrada))));
-        $diferencia = $inicio ->diff($fin);
-        $tardanza = $diferencia->format('%H:%i:%s');
-      }
-      $sql = $conexion->query("insert into asistencia (id_matricula,fecha, entrada, tardanza) values ('$id_matricula', '$fecha', '$hora', '$tardanza') ");
-      if ($sql == true) { ?>
-
-        <script>
-          $(function notificacion() {
-            new PNotify({
-              title: "CORRECTO",
-              type: "success",
-              text: "Se ha registrado su ENTRADA con éxito",
-              styling: "bootstrap3"
-            })
-          })
-        </script>
-      <?php } else { ?>
-        <script>
-          $(function notificacion() {
-            new PNotify({
-              title: "INCORRECTO",
-              type: "error",
-              text: "Error al registrar ENTRADA",
-              styling: "bootstrap3"
-            })
-          })
-        </script>
-      <?php }
-    } else { ?>
-      <script>
-        $(function notificacion() {
-          new PNotify({
-            title: "INCORRECTO",
-            type: "error",
-            text: "El DNI ingresado no existe",
-            styling: "bootstrap3"
-          })
-        })
-      </script>
-    <?php }
-  } else { ?>
-    <script>
-      $(function notificacion() {
-        new PNotify({
-          title: "INCORRECTO",
-          type: "error",
-          text: "Ingrese el DNI",
-          styling: "bootstrap3"
-        })
-      })
-    </script>
-  <?php } ?>
-  <script>
-    setTimeout(() => {
-      window.history.replaceState(null, null, window.location.pathname);
-    }, 0);
-  </script>
-
-<?php }
+session_start();
+if (empty($_SESSION['nombre']) and empty($_SESSION['apellido'])) {
+  header('location:login/login.php');
+}
 
 ?>
+<style>
+  ul li:nth-child(1) .activo {
+    background: #f3f340 !important;
+  }
+</style>
 
+<!-- primero se carga el topbar -->
+<?php require('./layout/topbar.php'); ?>
+<!-- luego se carga el sidebar -->
+<?php require('./layout/sidebar.php'); ?>
 
+<!-- inicio del contenido principal -->
+<div class="page-content">
 
+  <h4 class="text-center text-secondary">ASISTENCIA DE ALUMNOS</h4>
+  <?php
+  include "../modelo/conexion.php";
+  include "../controlador/controlador_eliminar_asistencia.php";
+  $fechainicio = empty($_GET['fInicio']) ? date('Y-m-01') : $_GET['fInicio'];
+  $fechafinal = empty($_GET['fFinal']) ? date('Y-m-t') : $_GET['fFinal'];
+  $sql = $conexion->query("SELECT
+    asistencia.id_asistencia, 
+    asistencia.fecha, 
+    asistencia.entrada, 
+    asistencia.salida, 
+    asistencia.tardanza, 
+    asistencia.id_matricula, 
+    matricula.id_matricula, 
+    matricula.id_alumno, 
+    alumno.id_alumno, 
+    alumno.nombre, 
+    alumno.dni, 
+    alumno.apellidos
+  FROM
+    matricula
+    INNER JOIN
+    alumno
+    ON 
+      matricula.id_alumno = alumno.id_alumno
+    INNER JOIN
+    asistencia
+    ON 
+      matricula.id_matricula = asistencia.id_matricula
+    WHERE (fecha BETWEEN '$fechainicio' AND '$fechafinal')");
 
-
-<?php
-if (!empty($_POST["btnsalida"])) {
-  if (!empty($_POST["txtdni"])) {
-    $dni = $_POST["txtdni"];
-    $consulta = $conexion->query("select count(*) as 'total' from   alumno a  inner join matricula m on a.id_alumno=m.id_alumno where a.dni='$dni' ");
-    $id = $conexion->query("select m.id_matricula from   alumno a  inner join matricula m on a.id_alumno=m.id_alumno where a.dni='$dni' ");
-    if ($consulta->fetch_object()->total > 0) {
-      $hora = date("h:i:s");
-      $id_matricula = $id->fetch_object()->id_matricula;
-
-      $busqueda = $conexion->query("select id_asistencia from asistencia where id_matricula=$id_matricula order by id_asistencia desc limit 1");
-      $id_asistencia = $busqueda->fetch_object()->id_asistencia;
-      $sql = $conexion->query("update asistencia set salida='$hora' where id_asistencia=$id_asistencia ");
-      if ($sql == true) { ?>
-        <script>
-          $(function notificacion() {
-            new PNotify({
-              title: "CORRECTO",
-              type: "success",
-              text: "Se ha registrado su SALIDA con éxito",
-              styling: "bootstrap3"
-            })
-          })
-        </script>
-      <?php } else { ?>
-        <script>
-          $(function notificacion() {
-            new PNotify({
-              title: "INCORRECTO",
-              type: "error",
-              text: "Error al registrar SALIDA",
-              styling: "bootstrap3"
-            })
-          })
-        </script>
+  ?>
+  <div class="row" style="margin-bottom: 2em">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+      <div class="col-md-3 col-12">
+        <a href="fpdf/ReporteAsistencia.php?fInicio=<?php echo $fechainicio ?>&fFinal=<?php echo $fechafinal ?>" target="_blank" class="btn btn-success" style="margin-top: 1.4em" > <i class="fas fa-file-pdf"></i>GENERAR REPORTES</a>
+      </div>
+      <div class="col-md-3 col-6">
+        <label for="">Desde:</label>
+        <input type="date" name="fInicio" value="<?php echo $fechainicio ?>" class="form-control corm-control-sm">
+      </div>
+      <div class="col-md-3 col-6">
+        <label for="">Hasta:</label>
+        <input type="date" name="fFinal" value="<?php echo $fechafinal ?>" class="form-control corm-control-sm">
+      </div>
+      <div class="col-md-3 col-6">
+        <input type="submit" class="btn btn-primary" style="margin-top: 1.4em" name="submit" value="Buscar">
+      </div>
+    </form>
+  </div>
+  <!-- <div class="text-left mb-2">
+  </div> -->
+  <table class="table table-bordered table-striped border-primary w-100" id="example">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">ALUMNO</th>
+        <th scope="col">DNI</th>
+        <th scope="col">FECHA</th>
+        <th scope="col">ENTRADA</th>
+        <th scope="col">SALIDA</th>
+        <th scope="col">TARDANZA</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      while ($datos = $sql->fetch_object()) { ?>
+        <tr>
+          <th><?= $datos->id_asistencia ?></th>
+          <td><?= $datos->nombre . " " . $datos->apellidos ?></td>
+          <td><?= $datos->dni ?></td>
+          <td><?= $datos->fecha ?></td>
+          <td><?= $datos->entrada ?></td>
+          <td><?= $datos->salida ?></td>
+          <td><?= $datos->tardanza ?></td>
+          <td>
+            <a href="inicio.php?id=<?= $datos->id_asistencia ?>" onclick="advertencia(event)" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+          </td>
+        </tr>
       <?php }
-    } else { ?>
-      <script>
-        $(function notificacion() {
-          new PNotify({
-            title: "INCORRECTO",
-            type: "error",
-            text: "El DNI ingresado no existe",
-            styling: "bootstrap3"
-          })
-        })
-      </script>
-    <?php }
-  } else { ?>
-    <script>
-      $(function notificacion() {
-        new PNotify({
-          title: "INCORRECTO",
-          type: "error",
-          text: "Ingrese el DNI",
-          styling: "bootstrap3"
-        })
-      })
-    </script>
-  <?php } ?>
-  <script>
-    setTimeout(() => {
-      window.history.replaceState(null, null, window.location.pathname);
-    }, 0);
-  </script>
-
-<?php }
-
-?>
+      ?>
 
 
+    </tbody>
+  </table>
+</div>
+</div>
+<!-- fin del contenido principal -->
+
+
+<!-- por ultimo se carga el footer -->
+<?php require('./layout/footer.php'); ?>
