@@ -1,4 +1,5 @@
 <?php
+ session_start();
 if (!empty($_POST["btnentrada"])) {
   if (!empty($_POST["txtdni"])) {
     $dni = $_POST["txtdni"];
