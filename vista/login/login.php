@@ -23,7 +23,7 @@
         <div class="login-content">
             <form method="POST" action="">
                 <img src="img/usuario1.png">
-                <h2 class="title">BIENVENIDO <?php echo $_SESSION["nombre"]; ?></h2>
+                <h2 class="title">BIENVENIDO</h2>
                 <div class="input-div one">
                     <div class="i">
                         <i class="fas fa-user"></i>
