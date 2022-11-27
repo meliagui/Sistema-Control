@@ -16,8 +16,6 @@
                         <span class="lbl">ALUMNOS</span>
                     </a>
                 </li>
-
-                
                 <li class="red">
                     <a href="matricula.php" class="activo">
                         <img src="../public/img-inicio/colegio.png" class="img-inicio" alt="">

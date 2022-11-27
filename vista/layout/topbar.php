@@ -19,6 +19,8 @@
         <link rel="stylesheet" href="../public/app/publico/css/separate/vendor/lobipanel.min.css">
         <link rel="stylesheet" href="../public/app/publico/css/lib/jqueryui/jquery-ui.min.css">
         <link rel="stylesheet" href="../public/app/publico/css/separate/pages/widgets.min.css">
+        <link rel="stylesheet" href="../public/app/publico/css/separate/pages/widgets.min.css">
+        
 
         <!-- font awesome -->
         <link rel="stylesheet" href="../public/fontawesome/css/all.min.css">
@@ -28,7 +30,8 @@
         <!-- datatables -->
         <link rel="stylesheet" href="../public/app/publico/css/lib/datatables-net/datatables.min.css">
         <link rel="stylesheet" href="../public/app/publico/css/separate/vendor/datatables-net.min.css">
-
+    
+ 
         <link href="../public/app/publico/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
         <link href="../public/app/publico/css/main.css" rel="stylesheet">
         <link href="../public/app/publico/css/mis_estilos/estilos.css" rel="stylesheet">
@@ -61,7 +64,7 @@
 
         <!-- chart js -->
         <script src="../public/chart/chart.js"></script>
-
+      
         <style>
             .marca {
                 width: 100%;
